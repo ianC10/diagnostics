@@ -438,6 +438,8 @@
   background-color: transparent;
   color: white;
   cursor: pointer;
+  border:none;
   transition: background-color 0.3s ease;
+  transform:translate(0px,-80px);
 }
 

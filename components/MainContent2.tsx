@@ -22,6 +22,57 @@ import ControlUnit3 from '../components/ControlUnit3';
 const MainContent: React.FC = () => {
   const [activeSidebar, setActiveSidebar] = useState('Battery');
   const [activeMiniSidebar, setActiveMiniSidebar] = useState<string | null>(null);
+  const [heartbeatStatus, setHeartbeatStatus] = useState('BEATING');
+  const heartbeat1Status = 'BEATING';
+  const activeStatus = 'ACTIVE';
+  const activeSoulStatus = 'MAIN';
+  const heartbeat2Status = 'BEATING';
+  const masterControlStatus = 'ON';
+  const steeringRackStatus = 'OFF';
+  const brakeStatus = 'OFF';
+  const motorsStatus = 'OFF';
+  const autonomousStatus = 'ON';
+  const manualModeStatus = 'OFF';
+  const hardwareModeStatus = 'OFF';
+  const steeringPIDOutput = 504;
+  const brakePIDOutput = 203;
+  const motorRPIDOutput1 = 2500;
+  const motorRPIDOutput2 = 2500; 
+  const masterPIDOutput = 350;
+  const currentDrawn = 245; 
+  const batteryVoltage = 67;
+  const chargePercentage = 85;
+  const temperature = 28;  
+  const goodCells = 39;    
+  const poorCells = 1;     
+  const totalCells = 40; 
+  const avgVoltage = 3.3;  // Example average cell voltage
+  const minVoltage = 0.5;  // Example minimum cell voltage
+  const maxVoltage = 4.5;  // Example maximum cell voltage
+  const minCellCount = 10; // Example minimum cell count
+  const maxCellCount = 12;
+  const mosfetCharging = "YES";  // Example dynamic value
+  const mosfetDischarging = "NO";  // Example dynamic value
+  const chargerStatus = "Not connected to charger"; 
+  const errorImage = "images/Good cell.svg"; // Image source dynamically
+  const batteryStatus = "Currently Working Fine."; // Example dynamic value
+  const lastErrorCode = "232"; // Example dynamic value
+  const lastErrorTime = "23/7 15:30"; // Example dynamic value
+  const batteryCapacity = "257";
+  const currentTemp = "37";
+  const acCurrent = "79"; // Example dynamic current value
+  const acVoltage = "256"; // Example dynamic temperature value
+  const acPower = "3200";
+  const chargingTime = "120";
+  const dcCurrent = "79";  // Example dynamic DC current value
+  const dcVoltage = "46";
+  const errorStatus = "Currently Working Fine.";  // Example dynamic status
+  const errorCode = "232";  // Example dynamic error code
+  const errorDate = "23/7 15:30";  // Example dynamic error date
+  const isWorkingFine = true; 
+  const temperature2 = 37;  // Example dynamic temperature value
+  const isGood = true; 
+
 
   const handleSidebarClick = (category: string) => {
     setActiveSidebar(category);
@@ -33,7 +84,7 @@ const MainContent: React.FC = () => {
   };
 
   const miniSidebarButtons: { [key: string]: string[] } = {
-    'Battery': ['Voltage and Current', 'Charge Level', 'Battery Health', 'Cell Voltages', 'Charging Status', 'Battery Status','Temperature Data'],
+    'Battery': ['Voltage and Current', 'Charge Level', 'Battery Health', 'Cell Voltages', 'Charging Status', 'Battery Status', 'Temperature Data'],
     'OBC': ['AC Voltage and Current', 'AC Power', 'Charging Time', 'DC Voltage and Current', 'OBC Status', 'Temperature Data'],
     'AC': ['Temperature', 'Fan Speed', 'AC Status'],
     'Seating and Lights': ['External Lighting', 'Internal Lighting', 'Table Status'],
@@ -47,9 +98,9 @@ const MainContent: React.FC = () => {
       <div className="mini-sidebar">
         {miniSidebarButtons[activeSidebar].map((buttonLabel) => (
           <button 
-          key={buttonLabel} 
-          className={`mini-sidebar-button ${activeMiniSidebar === buttonLabel ? 'active' : ''}`}
-          onClick={() => handleMiniSidebarClick(buttonLabel)}
+            key={buttonLabel} 
+            className={`mini-sidebar-button ${activeMiniSidebar === buttonLabel ? 'active' : ''}`}
+            onClick={() => handleMiniSidebarClick(buttonLabel)}
           >
             <div className="mini-sidebar-text">
               {buttonLabel}
@@ -62,61 +113,111 @@ const MainContent: React.FC = () => {
 
   const renderContent = () => {
     if (activeSidebar === 'Battery' && activeMiniSidebar === 'Voltage and Current') {
-      return <VoltageCurrentContent />;
+      return  <VoltageCurrentContent
+      currentDrawn={currentDrawn}
+      batteryVoltage={batteryVoltage}
+    />
     }
     if (activeSidebar === 'Battery' && activeMiniSidebar === 'Charge Level') {
-      return <ChargeLevel />;
+      return   <ChargeLevel chargePercentage={chargePercentage} />;
     }
     if (activeSidebar === 'Battery' && activeMiniSidebar === 'Battery Health') {
-      return <BatteryHealth />;
+      return       <BatteryHealth
+      temperature={temperature}
+      goodCells={goodCells}
+      poorCells={poorCells}
+      totalCells={totalCells}
+    />
     }
     if (activeSidebar === 'Battery' && activeMiniSidebar === 'Cell Voltages') {
-      return <CellVoltage />;
+      return      <CellVoltage 
+      avgVoltage={avgVoltage} 
+      minVoltage={minVoltage} 
+      maxVoltage={maxVoltage} 
+      minCellCount={minCellCount} 
+      maxCellCount={maxCellCount} 
+    />
     }
     if (activeSidebar === 'Battery' && activeMiniSidebar === 'Charging Status') {
-      return <ChargingStatus />;
+      return       <ChargingStatus 
+      mosfetCharging={mosfetCharging} 
+      mosfetDischarging={mosfetDischarging} 
+      chargerStatus={chargerStatus} 
+    />
     }
     if (activeSidebar === 'Battery' && activeMiniSidebar === 'Battery Status') {
-      return <BatteryStatus />;
+      return <BatteryStatus 
+      errorImage={errorImage} 
+      batteryStatus={batteryStatus} 
+      lastErrorCode={lastErrorCode} 
+      lastErrorTime={lastErrorTime} 
+      batteryCapacity={batteryCapacity} 
+    />
     }
     if (activeSidebar === 'Battery' && activeMiniSidebar === 'Temperature Data') {
-      return <TemperatureData1 />;
+      return       <TemperatureData1 
+      currentTemp={currentTemp} 
+     
+    />;
     }
     if (activeSidebar === 'OBC' && activeMiniSidebar === 'AC Voltage and Current') {
-      return <AcVoltageAndCurrent />;
+      return   <AcVoltageAndCurrent acCurrent={acCurrent} acVoltage={acVoltage} />;
     }
     if (activeSidebar === 'OBC' && activeMiniSidebar === 'AC Power') {
-      return <ACPower />;
+      return <ACPower acPower={acPower} />;
     }
     if (activeSidebar === 'OBC' && activeMiniSidebar === 'Charging Time') {
-      return <ChargingTime />;
+      return <ChargingTime chargingTime={chargingTime} />;
     }
     if (activeSidebar === 'OBC' && activeMiniSidebar === 'DC Voltage and Current') {
-      return <DcVoltageAndCurrent />;
+      return  <DcVoltageAndCurrent dcCurrent={dcCurrent} dcVoltage={dcVoltage} />
     }
     if (activeSidebar === 'OBC' && activeMiniSidebar === 'OBC Status') {
-      return <OBCStatus />;
+      return   <OBCStatus 
+      errorStatus={errorStatus} 
+      errorCode={errorCode} 
+      errorDate={errorDate} 
+      isWorkingFine={isWorkingFine} 
+    />;
     }
     if (activeSidebar === 'OBC' && activeMiniSidebar === 'Temperature Data') {
-      return <TemperatureData2 />;
+      return    <TemperatureData2 
+      temperature2={temperature2} 
+      isGood={isGood} 
+    />
     }
     if (activeSidebar === 'Vehicular Control' && activeMiniSidebar === 'Low Level Controls') {
-      return <LowLevelControls />;
+      return       <LowLevelControls
+      autonomousStatus={autonomousStatus}
+      manualModeStatus={manualModeStatus}
+      hardwareModeStatus={hardwareModeStatus}
+    />
     }
     if (activeSidebar === 'Vehicular Control' && activeMiniSidebar === 'PID Master Values') {
-      return <PIDMasterValues />;
+      return       <PIDMasterValues
+      steeringPIDOutput={steeringPIDOutput}
+      brakePIDOutput={brakePIDOutput}
+      motorRPIDOutput1={motorRPIDOutput1}
+      motorRPIDOutput2={motorRPIDOutput2}
+      masterPIDOutput={masterPIDOutput}
+    />
     }
     if (activeSidebar === 'Vehicular Control' && activeMiniSidebar === 'PID Controls') {
-      return <PIDControls />;
+      return <PIDControls
+      masterControlStatus={masterControlStatus}
+      steeringRackStatus={steeringRackStatus}
+      brakeStatus={brakeStatus}
+      motorsStatus={motorsStatus}
+    />
     }
     if (activeSidebar === 'Vehicular Control' && activeMiniSidebar === 'Control Unit 1') {
-      return <ControlUnit1 />;
+      return <ControlUnit1 heartbeatStatus={heartbeatStatus} />;
     }
     if (activeSidebar === 'Vehicular Control' && activeMiniSidebar === 'Control Unit 2') {
-      return <ControlUnit2 />;
+      return <ControlUnit2 heartbeat1Status={heartbeat1Status} activeStatus={activeStatus} activeSoulStatus={activeSoulStatus} />;
     }
     if (activeSidebar === 'Vehicular Control' && activeMiniSidebar === 'Control Unit 3') {
-      return <ControlUnit3 />;
+      return <ControlUnit3 heartbeat2Status={heartbeat2Status} />;
     }
     return null;
   };

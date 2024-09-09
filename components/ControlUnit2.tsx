@@ -1,39 +1,50 @@
 import React from 'react';
 
-const ControlUnit2: React.FC = () => {
+interface ControlUnit2Props {
+  heartbeat1Status: string;
+  activeStatus: string;
+  activeSoulStatus: string;
+}
+
+const ControlUnit2: React.FC<ControlUnit2Props> = ({ heartbeat1Status, activeStatus, activeSoulStatus }) => {
   return (
     <div className="voltage-current-container">
       <div className="control-unit-box">
         <div className="panel-title">Control Unit 2</div>
-        <br></br>
-        <div className="control-unit-item">
-          <span className="control-unit-label">MPU Motion Planner</span>
-          <span className="control-unit-status">Status</span>
-          <span className="control-unit-status-detail">ACTIVE</span>
+        <br />
+        <div className="control-unit2-item">
+          <span className="control-unit2-label">MPU Motion Planner</span>
+          <span className="control-unit2-status">Status</span>
+          <span className="control-unit2-status-detail">{activeStatus}</span>
         </div>
-        <div className="control-unit-item">
-          <span className="control-unit-label">ECU1-VCU</span>
-          <span className="control-unit-status">Heartbeat</span>
-          <span className="control-unit-status-detail">BEATING</span>
-          <span className="control-unit-status">Active Soul</span>
-          <span className="control-unit-status-detail">MAIN</span>
+        <div className="control-unit2-item">
+          <span className="control-unit2-label">ECU1-VCU</span>
+          <span className="control-unit2-status">Heartbeat</span>
+          <span className="control-unit2-status-detail">{heartbeat1Status}</span>
+          <br />
+          <br />
+          <span className="control-unit2-status">Active Soul</span>
+          <span className="control-unit2-status-detail">{activeSoulStatus}</span>
         </div>
-        <div className="control-unit-item">
-          <span className="control-unit-label">ECUX-FCU</span>
-          <span className="control-unit-status">Heartbeat</span>
-          <span className="control-unit-status-detail">BEATING</span>
+        <div className="control-unit2-item">
+          <span className="control-unit2-label">ECUX-FCU</span>
+          <span className="control-unit2-status">Heartbeat</span>
+          <span className="control-unit2-status-detail">{heartbeat1Status}</span>
+          <br />
         </div>
-        <div className="control-unit-item">
-          <span className="control-unit-label">ECU3-DoorECU</span>
-          <span className="control-unit-status">Heartbeat</span>
-          <span className="control-unit-status-detail">BEATING</span>
-          <span className="control-unit-status">Active Soul</span>
-          <span className="control-unit-status-detail">MAIN</span>
+        <div className="control-unit2-item">
+          <span className="control-unit2-label">ECU3-DoorECU</span>
+          <span className="control-unit2-status">Heartbeat</span>
+          <span className="control-unit2-status-detail">{heartbeat1Status}</span>
+          <span className="control-unit2-status">Active Soul</span>
+          <span className="control-unit2-status-detail">{activeSoulStatus}</span>
+          <br />
         </div>
-        <div className="control-unit-item">
-          <span className="control-unit-label">ECU4-RPi-OUT</span>
-          <span className="control-unit-status">Heartbeat</span>
-          <span className="control-unit-status-detail">BEATING</span>
+        <div className="control-unit2-item">
+          <span className="control-unit2-label">ECU4-RPi-OUT</span>
+          <span className="control-unit2-status">Heartbeat</span>
+          <span className="control-unit2-status-detail">{heartbeat1Status}</span>
+          <br />
         </div>
         <div className="control-unit-line"></div>
       </div>

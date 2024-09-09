@@ -1,6 +1,14 @@
 import React from 'react';
 
-const VoltageCurrentContent: React.FC = () => {
+interface VoltageCurrentContentProps {
+  currentDrawn: number;
+  batteryVoltage: number;
+}
+
+const VoltageCurrentContent: React.FC<VoltageCurrentContentProps> = ({
+  currentDrawn,
+  batteryVoltage
+}) => {
   return (
     <div className="voltage-current-container">
       <div className="car-container">
@@ -11,14 +19,14 @@ const VoltageCurrentContent: React.FC = () => {
         <div className="panel-info">Est. Battery</div>
         <div className="panel-info">Current drawn</div>
         <div className="panel-info">(-500 to +500A)</div>
-        <div className="panel-value">245 A</div>
+        <div className="panel-value">{currentDrawn} A</div>
       </div>
       <div className="battery-voltage">
         <div className="panel-title">Battery Voltage</div>
         <div className="panel-info">Est. Battery</div>
         <div className="panel-info">Voltage (0 to</div>
         <div className="panel-info">100v)</div>
-        <div className="panel-value">67 V</div>
+        <div className="panel-value">{batteryVoltage} V</div>
       </div>
     </div>
   );
