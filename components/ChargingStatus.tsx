@@ -1,22 +1,29 @@
 import React from 'react';
 
-const ChargingStatus: React.FC = () => {
+interface ChargingStatusProps {
+  mosfetCharging: string;
+  mosfetDischarging: string;
+  chargerStatus: string;
+}
+
+const ChargingStatus: React.FC<ChargingStatusProps> = ({ mosfetCharging, mosfetDischarging, chargerStatus }) => {
   return (
     <div className="voltage-current-container">
       <div className="car-container">
-        <img src="/images/Car image.svg" alt="Car"/>
+        <img src="/images/Car image.svg" alt="Car" />
       </div>
       <div className="status-charge">
         <div className="panel-title">Charging Status</div>
         <br></br>
         <div className="panel-info">MOSFET</div>
         <div className="panel-info">Charging</div>
+        <div className="mosfet-status">{mosfetCharging}</div>
         <br></br>
         <div className="panel-info">MOSFET</div>
         <div className="panel-info">Discharging</div>
-        <div className="charging-status">Not connected to charger</div>
-        <div className="mosfet-status">YES</div>
-        <div className="mosfet-status">NO</div>
+        <div className="mosfet-status">{mosfetDischarging}</div>
+        <br></br>
+        <div className="charging-status">{chargerStatus}</div>
         <div className="status-charge-line"></div>
       </div>
     </div>

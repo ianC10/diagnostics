@@ -1,6 +1,10 @@
 import React from 'react';
 
-const ControlUnit1: React.FC = () => {
+interface ControlUnit1Props {
+  heartbeatStatus: string;
+}
+
+const ControlUnit1: React.FC<ControlUnit1Props> = ({ heartbeatStatus }) => {
   return (
     <div className="voltage-current-container">
       <div className="control-unit-box">
@@ -9,17 +13,17 @@ const ControlUnit1: React.FC = () => {
         <div className="control-unit-item">
           <span className="control-unit-label">ECU2-ICU</span>
           <span className="control-unit-status">Heartbeat</span>
-          <span className="control-unit-status-detail">BEATING</span>
+          <span className="control-unit-status-detail">{heartbeatStatus}</span>
         </div>
         <div className="control-unit-item">
           <span className="control-unit-label">ECU716-VHMS</span>
           <span className="control-unit-status">Heartbeat</span>
-          <span className="control-unit-status-detail">BEATING</span>
+          <span className="control-unit-status-detail">{heartbeatStatus}</span>
         </div>
         <div className="control-unit-item">
           <span className="control-unit-label">ECU8-USU</span>
           <span className="control-unit-status">Heartbeat</span>
-          <span className="control-unit-status-detail">BEATING</span>
+          <span className="control-unit-status-detail">{heartbeatStatus}</span>
         </div>
         <div className="control-unit-item">
           <span className="control-unit-label">17 - Monitor and Processor</span>

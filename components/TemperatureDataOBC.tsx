@@ -1,6 +1,11 @@
 import React from 'react';
 
-const TemperatureData2: React.FC = () => {
+interface TemperatureData2Props {
+  temperature2: number;
+  isGood: boolean;
+}
+
+const TemperatureData2: React.FC<TemperatureData2Props> = ({ temperature2, isGood }) => {
   return (
     <div className="voltage-current-container">
       <div className="car-container">
@@ -11,9 +16,9 @@ const TemperatureData2: React.FC = () => {
         <br></br>
         <br></br>
         <div className="panel-info">Current temp</div>
-        <div className="temperature-value">37 C</div>
+        <div className="temperature-value">{temperature2} C</div>
         <div className="temp-data-image">
-            <img src="/images/Good cell.svg" alt="TempSuccess" />
+            <img src={isGood ? "/images/Good cell.svg" : "/images/Poor cell.svg"} alt={isGood ? "TempSuccess" : "TempWarning"} />
         </div>
         <div className="temp-line"></div>
       </div>

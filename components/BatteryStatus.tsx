@@ -1,21 +1,35 @@
 import React from 'react';
 
-const BatteryStatus: React.FC = () => {
+interface BatteryStatusProps {
+  errorImage: string;
+  batteryStatus: string;
+  lastErrorCode: string;
+  lastErrorTime: string;
+  batteryCapacity: string;
+}
+
+const BatteryStatus: React.FC<BatteryStatusProps> = ({ 
+  errorImage, 
+  batteryStatus, 
+  lastErrorCode, 
+  lastErrorTime, 
+  batteryCapacity 
+}) => {
   return (
     <div className="voltage-current-container">
       <div className="car-container">
-        <img src="/images/Car image.svg" alt="Car"/>
+        <img src="/images/Car image.svg" alt="Car" />
       </div>
       <div className="status-battery-error">
         <div className="panel-title">Battery Error Status</div>
         <br></br>
         <div className="error-status-image">
-          <img src="images/Good cell.svg" alt="GoodCell" />
+          <img src={errorImage} alt="Error Status" />
         </div>
-        <div className="battery-working">Currently Working Fine.</div>
+        <div className="battery-working">{batteryStatus}</div>
         <div className="panel-info">Last Error</div>
-        <div className="panel-info">Code: 232</div>
-        <div className="panel-info">on 23/7 15:30</div>  
+        <div className="panel-info">Code: {lastErrorCode}</div>
+        <div className="panel-info">on {lastErrorTime}</div>  
         <button className="check-history">
           <img src="images/Error Status.svg" alt="CheckHistory"/>
         </button>      
@@ -25,7 +39,7 @@ const BatteryStatus: React.FC = () => {
         <div className="panel-info">Est. Battery</div>
         <div className="panel-info">Capacity (0 to</div>
         <div className="panel-info">300Ah)</div>
-        <div className="status-panel-value">257 Ah</div>
+        <div className="status-panel-value">{batteryCapacity} Ah</div>
       </div>
     </div>
   );
