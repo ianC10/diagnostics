@@ -18,6 +18,10 @@ import PIDControls from '../components/PIDControls';
 import ControlUnit1 from '../components/ControlUnit1';
 import ControlUnit2 from '../components/ControlUnit2';
 import ControlUnit3 from '../components/ControlUnit3';
+import Seating from '../components/Seating';
+import InternalLighting from '../components/InternalLighting';
+import ExternalLighting from '../components/ExternalLighting';
+import TableStatus from '../components/TableStatus';
 
 const MainContent: React.FC = () => {
   const [activeSidebar, setActiveSidebar] = useState('Battery');
@@ -87,7 +91,7 @@ const MainContent: React.FC = () => {
     'Battery': ['Voltage and Current', 'Charge Level', 'Battery Health', 'Cell Voltages', 'Charging Status', 'Battery Status', 'Temperature Data'],
     'OBC': ['AC Voltage and Current', 'AC Power', 'Charging Time', 'DC Voltage and Current', 'OBC Status', 'Temperature Data'],
     'AC': ['Temperature', 'Fan Speed', 'AC Status'],
-    'Seating and Lights': ['External Lighting', 'Internal Lighting', 'Table Status'],
+    'Seating and Lights': ['Seating','External Lighting', 'Internal Lighting', 'Table Status'],
     'Car Status': ['Car Mode', 'Bywire System', 'TV', 'Car Data Level1', 'Car Data Level2', 'Car Data Level3', 'Car Data Level4', 'Error Statuses'],
     'Doors and Tyres': ['Tyres', 'Side Doors', 'Roof and Boot Doors'],
     'Vehicular Control': ['Low Level Controls', 'PID Master Values', 'PID Controls', 'Control Unit 1', 'Control Unit 2', 'Control Unit 3']
@@ -219,9 +223,20 @@ const MainContent: React.FC = () => {
     if (activeSidebar === 'Vehicular Control' && activeMiniSidebar === 'Control Unit 3') {
       return <ControlUnit3 heartbeat2Status={heartbeat2Status} />;
     }
+    if (activeSidebar === 'Seating and Lights' && activeMiniSidebar === 'Seating') {
+      return <Seating/>;}
+    if (activeSidebar === 'Seating and Lights' && activeMiniSidebar === 'External Lighting') {
+        return <ExternalLighting/>;
+      }
+    if (activeSidebar === 'Seating and Lights' && activeMiniSidebar === 'Internal Lighting') {
+      return <InternalLighting/>;
+    }
+    if (activeSidebar === 'Seating and Lights' && activeMiniSidebar === 'Table Status') {
+      return <TableStatus/>;
+    }
     return null;
   };
-
+  
   return (
     <div className="body">
       <div className="sidebar">
